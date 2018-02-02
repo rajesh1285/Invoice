@@ -1,0 +1,17 @@
+Using multiline declarations in Haml is intentionally awkward. This is designed to discourage people from putting lots and lots of Ruby code in their Haml templates. If you find yourself using multiline declarations, stop and think: could I do this better with a helper?
+
+Note that there are a few cases where it’s useful to allow something to flow over onto multiple lines in a non-awkward manner. One of these is HTML attributes. Some elements just have lots of attributes, so you can wrap attributes without using | (see Attributes).
+
+In addition, sometimes you need to call Ruby methods or declare data structures that just need a lot of template information. So data structures and functions that require lots of arguments can be wrapped over multiple lines, as long as each line but the last ends in a comma (see Inserting Ruby).
+
+Whitespace Preservation
+Sometimes you don’t want Haml to indent all your text. For example, tags like pre and textarea are whitespace-sensitive; indenting the text makes them render wrong.
+
+Haml deals with this by “preserving” newlines before they’re put into the document – converting them to the HTML whitespace escape code, &#x000A;. Then Haml won’t try to re-format the indentation.
+
+Literal textarea and pre tags automatically preserve content given through =. Dynamically-generated textareas and pres can’t be preserved automatically, and so should be passed through Haml::Helpers#find_and_preserve or the ~ command, which has the same effect.
+
+Blocks of literal text can be preserved using the :preserve filter.
+
+Helpers
+Haml offers a bunch of helpers that are useful for doing stuff like preserving whitespace, creating nicely indented output for user-defined helpers, and other useful things. The helpers are all documented in the Haml::Helpers and Haml::Helpers::ActionViewExtensions modules.

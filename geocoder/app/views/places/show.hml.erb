@@ -1,0 +1,12 @@
+<header><h1 class="display-4"><%= @place.title %></h1></header>
+
+<p>Address: <%= @place.address %></p>
+<p>Coordinates: <%= @place.latitude %> <%= @place.longitude %></p>
+
+<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@place.latitude},#{@place.longitude}&markers=#{@place.latitude},#{@place.longitude}&zoom=7&size=640x400&key=AIzaSyDsWZIHClP1cNruUYKBtzrFxujxxsW0lgo",
+              class: 'img-fluid img-rounded', alt: "#{@place.title} on the map"%>
+
+  
+
+<%= image_tag "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670,151.1957&radius=500&types=food&name=cruise&key=AIzaSyDsWZIHClP1cNruUYKBtzrFxujxxsW0lgo"class: 'img-fluid img-rounded', alt: "#{@place.title} on the map"%>
+ 

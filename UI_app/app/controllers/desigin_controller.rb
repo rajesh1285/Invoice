@@ -1,0 +1,2 @@
+class DesiginController < ApplicationController
+end

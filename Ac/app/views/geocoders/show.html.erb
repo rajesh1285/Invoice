@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @geocoder.address %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @geocoder.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @geocoder.longitude %>
+</p>
+
+<%= link_to 'Edit', edit_geocoder_path(@geocoder) %> |
+<%= link_to 'Back', geocoders_path %>

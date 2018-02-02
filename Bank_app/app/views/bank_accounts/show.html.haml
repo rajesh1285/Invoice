@@ -1,0 +1,66 @@
+%h1
+  Account Number: #{@bank_account.account_number}
+
+
+  %small
+    #{@bank_account.client.first_name} #{@bank_account.client.last_name}
+
+= button_tag :transaction, id: "btn_transaction" ,class: "btn btn-primary" do 
+  NewTransactions	
+ 
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Date of Transction
+      %th Transction type
+      %th Amount
+  %tbody
+    - @bank_account.account_transaction.each do |t|
+      %tr
+        %td #{t.created_at}
+        %td #{t.transction}
+        %td #{number_to_currency(t.balance,unit: "P")} 
+    %tr
+      %th 
+      %th Balance
+      %th #{number_to_currency(@bank_account.balance,unit: "P")} 
+#parameters{ data: { bank_account_id: @bank_account.id } }
+#modal-transaction.modal.fade.modal-fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        .row
+          .col-md-12
+            %h2
+              NewTranscations 
+        %button.close{type:'button', data:{dismiss:'modal'}}
+          %span{aria:{hidden:'true'}}
+            %i.fa.fa-close
+          %span.sr-only Close
+        %h4.modal-title
+      .modal-body
+        .row
+          .col-md-12
+            .notification
+        .row
+          .col-md-6
+            %lable
+              Amount
+            = text_field_tag :amount, 0.00, id: "input_amount" ,class: "form-control"  
+          .col-md-6
+            %lable
+              TranscationType
+            = select_tag :transction,options_for_select(AccountTransaction::TRANSACTION),id: "select_transaction_type",class: "form-control"  
+        %p
+      .modal-footer
+        %button#btn-close.btn.btn-default{ type: "button" } Close
+        
+        %button#btn-save.btn.btn-primary{type:'button'} save
+
+  
+= javascript_include_tag "bank_accounts/show"
+:javascript
+  $(document).ready(function(){
+    show.init();
+  });
+	  
